@@ -1,21 +1,28 @@
 /* ==========================================================================
    Anteprima — 4 pagine / tema XStore + Elementor
-   Design tokens presi dal sito di partenza (verde #12715B, testo #101013,
-   fondi crema, container 1248px). Il font originale e' Graphik, che e' a
-   pagamento: qui uso Inter, gratuito e molto simile.
+
+   Struttura e misure prese dal sito di partenza (container 1248px, raggio 4px,
+   scala tipografica h1 54 / h2 48 / body 16-24).
+   I COLORI invece sono quelli di webhousesas.net, come richiesto:
+     blu del logo #003C6C  ·  arancio del sito #FF8C00  ·  testo #101013
+   Il font del sito di partenza e' Graphik, che e' a pagamento: qui uso Inter,
+   gratuito e molto simile.
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root{
-  --green:#12715B;
-  --green-dark:#0F604D;
-  --green-soft:#E8F1EE;
+  /* palette WebHouse / Marco Genovese: blu del logo + arancio del sito */
+  --brand:#003C6C;
+  --brand-dark:#002A4D;
+  --brand-soft:#E6EEF5;
+  --accent:#FF8C00;
+  --accent-dark:#E67E00;
   --ink:#101013;
   --ink-soft:#4A4A52;
-  --cream:#F5EEE9;
-  --cream-2:#F5F4ED;
-  --line:#E4E1DC;
+  --cream:#EFF3F7;
+  --cream-2:#F5F7F9;
+  --line:#DDE3EA;
   --white:#fff;
   --wrap:1248px;
   --r:4px;
@@ -43,8 +50,8 @@ p{margin:0}
 .section--cream{background:var(--cream)}
 .section--cream2{background:var(--cream-2)}
 .eyebrow{
-  font-size:15px;font-weight:600;color:var(--green);
-  margin-bottom:18px;
+  font-size:15px;font-weight:700;color:var(--accent);
+  margin-bottom:18px;letter-spacing:.01em;
 }
 .lede{font-size:18px;line-height:1.6;color:var(--ink-soft)}
 .center{text-align:center}
@@ -60,11 +67,11 @@ p{margin:0}
   transition:background .18s ease,border-color .18s ease,color .18s ease;
   white-space:nowrap;
 }
-.btn--primary{background:var(--green);border-color:var(--green);color:#fff}
-.btn--primary:hover{background:var(--green-dark);border-color:var(--green-dark)}
-.btn--ghost{background:transparent;border-color:var(--green);color:var(--green)}
-.btn--ghost:hover{background:var(--green);color:#fff}
-.btn--light{background:#fff;border-color:#fff;color:var(--green)}
+.btn--primary{background:var(--brand);border-color:var(--brand);color:#fff}
+.btn--primary:hover{background:var(--brand-dark);border-color:var(--brand-dark)}
+.btn--ghost{background:transparent;border-color:var(--brand);color:var(--brand)}
+.btn--ghost:hover{background:var(--brand);color:#fff}
+.btn--light{background:#fff;border-color:#fff;color:var(--brand)}
 .btn--light:hover{background:rgba(255,255,255,.88)}
 .btn--sm{height:42px;padding:0 18px;font-size:15px}
 
@@ -76,13 +83,13 @@ p{margin:0}
 .hdr__in{display:flex;align-items:center;gap:28px;height:80px}
 .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:21px;letter-spacing:-.03em}
 .logo__mark{
-  width:40px;height:40px;border-radius:9px;background:var(--green);
+  width:40px;height:40px;border-radius:9px;background:var(--brand);
   display:grid;place-items:center;color:#fff;font-size:15px;font-weight:800;letter-spacing:-.04em;
 }
-.logo__b{color:var(--green)}
+.logo__b{color:var(--brand)}
 .nav{display:flex;gap:30px;margin-left:auto}
 .nav a{font-size:16px;font-weight:500;color:var(--ink)}
-.nav a:hover,.nav a[aria-current]{color:var(--green)}
+.nav a:hover,.nav a[aria-current]{color:var(--brand)}
 .hdr .btn{margin-left:4px}
 .burger{display:none;margin-left:auto;width:44px;height:44px;border:1px solid var(--line);
   background:#fff;border-radius:var(--r);cursor:pointer;padding:0;place-items:center}
@@ -111,7 +118,7 @@ p{margin:0}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
 .step{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:32px 28px}
 .step__n{
-  width:38px;height:38px;border-radius:50%;background:var(--green-soft);color:var(--green);
+  width:38px;height:38px;border-radius:50%;background:var(--brand-soft);color:var(--brand);
   display:grid;place-items:center;font-weight:700;font-size:15px;margin-bottom:20px;
 }
 .step h3{margin-bottom:10px}
@@ -123,18 +130,18 @@ p{margin:0}
   background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);
   padding:30px 24px;text-align:center;transition:border-color .18s,transform .18s;
 }
-.card:hover{border-color:var(--green);transform:translateY(-3px)}
+.card:hover{border-color:var(--brand);transform:translateY(-3px)}
 .card__ico{
   width:66px;height:66px;margin:0 auto 18px;border-radius:50%;
   background:var(--cream-2);display:grid;place-items:center;
 }
-.card__ico svg{width:28px;height:28px;stroke:var(--green);fill:none;stroke-width:1.7;
+.card__ico svg{width:28px;height:28px;stroke:var(--brand);fill:none;stroke-width:1.7;
   stroke-linecap:round;stroke-linejoin:round}
 .card h3{margin-bottom:9px;font-size:18px}
 .card p{color:var(--ink-soft);font-size:15px;line-height:1.6}
 
 /* ---------- offer ---------- */
-.offer{background:var(--green);color:#fff;border-radius:var(--r-lg);padding:60px 56px;
+.offer{background:var(--brand);color:#fff;border-radius:var(--r-lg);padding:60px 56px;
   display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
 .offer h2{color:#fff}
 .offer p{margin-top:18px;font-size:17.5px;line-height:1.62;color:rgba(255,255,255,.9)}
@@ -147,15 +154,15 @@ p{margin:0}
 /* ---------- faq ---------- */
 .faq{max-width:860px;margin:0 auto}
 .faq details{border:1px solid var(--line);border-radius:var(--r-lg);background:#fff;margin-bottom:12px}
-.faq details[open]{border-color:var(--green)}
+.faq details[open]{border-color:var(--brand)}
 .faq summary{
   list-style:none;cursor:pointer;padding:22px 26px;font-weight:600;font-size:17px;
   display:flex;align-items:center;justify-content:space-between;gap:18px;
 }
 .faq summary::-webkit-details-marker{display:none}
 .faq summary::after{
-  content:"";flex:0 0 12px;width:12px;height:12px;border-right:2px solid var(--green);
-  border-bottom:2px solid var(--green);transform:rotate(45deg);transition:transform .2s;margin-top:-4px;
+  content:"";flex:0 0 12px;width:12px;height:12px;border-right:2px solid var(--brand);
+  border-bottom:2px solid var(--brand);transform:rotate(45deg);transition:transform .2s;margin-top:-4px;
 }
 .faq details[open] summary::after{transform:rotate(-135deg);margin-top:4px}
 .faq p{padding:0 26px 24px;color:var(--ink-soft);font-size:16px;line-height:1.65}
@@ -184,7 +191,7 @@ p{margin:0}
 
 /* ---------- note bar ---------- */
 .note{background:#101013;color:#fff;font-size:14px;padding:11px 24px;text-align:center}
-.note b{color:#7ee2c4}
+.note b{color:#FF8C00}
 
 /* ---------- responsive ---------- */
 @media (max-width:1080px){
