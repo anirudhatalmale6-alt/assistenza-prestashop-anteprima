@@ -10,7 +10,11 @@ Modificare SEMPRE questo file, mai i .html in preview/.
 """
 import pathlib, html, re
 
-OUT = pathlib.Path(__file__).parent / "preview"
+import sys
+# due destinazioni: l'anteprima pubblica e i file dentro il plugin WordPress.
+MODE = sys.argv[1] if len(sys.argv) > 1 else "preview"
+OUT = (pathlib.Path(__file__).parent /
+       ("preview" if MODE == "preview" else "plugin/webhouse-pagine/pagine"))
 
 # ---------------------------------------------------------------- dati reali
 # Forniti dal cliente il 10 set 2026. Nulla qui e' inventato.
@@ -41,6 +45,13 @@ NAV = [("index", "Home"), ("assistenza", "Assistenza PrestaShop"),
        ("gratis", "Gratis"), ("contattaci", "Contattaci")]
 
 
+def NOTE_BAR(page):
+    if MODE != "preview":
+        return ""
+    return ('<div class="note">Anteprima di lavoro &mdash; pagina <b>' + SHORT[page] +
+            '</b>. Manca solo il dato <span class="ph">evidenziato in giallo</span>.</div>')
+
+
 def head(page):
     links = "\n      ".join(
         f'<a href="{p}.html"{" aria-current=\"page\"" if p == page else ""}>{lbl}</a>'
@@ -52,15 +63,12 @@ def head(page):
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{TITLES[page]} &mdash; {AZIENDA}</title>
 <meta name="description" content="Assistenza tecnica PrestaShop a Treviso. Trasferisci hosting e dominio da noi e risolviamo il problema gratis.">
-<meta name="robots" content="noindex,nofollow">
+{'<meta name="robots" content="noindex,nofollow">' if MODE == "preview" else ''}
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 
-<div class="note">
-  Anteprima di lavoro &mdash; pagina <b>{SHORT[page]}</b>.
-  Manca solo il dato <span class="ph">evidenziato in giallo</span>.
-</div>
+{NOTE_BAR(page)}
 
 <header class="hdr">
   <div class="wrap hdr__in">
@@ -227,7 +235,7 @@ def page_index():
         card(I_BOLT,    "Negozio lento", "Misuriamo dove si perde tempo nel caricamento e interveniamo su cache, query, immagini e server."),
     ])
     steps = "\n      ".join([
-        step(1, "Raccontaci il problema", f"Scrivici su WhatsApp con due righe o un messaggio vocale. Ti risponde una persona che conosce PrestaShop, non un centralino. Siamo operativi {ORARI}."),
+        step(1, "Raccontaci il problema", f"Scrivici su WhatsApp con due righe o un messaggio vocale. Ti risponde una persona che conosce PrestaShop, non un centralino." + (f" Siamo operativi {ORARI}." if MODE == "preview" else "")),
         step(2, "Guardiamo cosa succede davvero", "Analizziamo il malfunzionamento senza chiederti nulla in cambio. Ti spieghiamo in parole semplici da cosa dipende e cosa serve per sistemarlo."),
         step(3, "Trasferisci e risolviamo", "Sposti hosting e dominio da noi, ci occupiamo noi della migrazione e del problema. Il negozio resta online per tutta l&rsquo;operazione."),
     ])
@@ -423,9 +431,14 @@ def page_gratis():
         step(4, "Sistemiamo il problema", "Interveniamo sulla copia nuova, dove possiamo lavorare con calma senza rischiare di far danni sul negozio che sta vendendo."),
         step(5, "Spostiamo il dominio", "Solo quando tutto funziona spostiamo il dominio. Il passaggio &egrave; questione di minuti e lo pianifichiamo con te nell&rsquo;orario che preferisci."),
     ])
-    faqs = "\n      ".join(faq(q, a, i == 0) for i, (q, a) in enumerate([
+    # Le due domande su prezzi/durata dipendono da dati che il cliente non ha
+    # ancora dato: in anteprima restano segnate in giallo, nel plugin le
+    # ometto invece di pubblicare un segnaposto o un prezzo inventato.
+    prezzi = [
         ("Sono vincolato per un periodo minimo?", '<span class="ph">[Da completare &mdash; dimmi la durata del contratto hosting]</span>'),
         ("Quanto costa l&rsquo;hosting?", '<span class="ph">[Da completare &mdash; dimmi i tuoi piani e i prezzi]</span>'),
+    ] if MODE == "preview" else []
+    faqs = "\n      ".join(faq(q, a, i == 0) for i, (q, a) in enumerate(prezzi + [
         ("E se dopo voglio andarmene?", "Ti diamo una copia completa di file e database e ti aiutiamo a spostarti. Il negozio &egrave; tuo."),
         ("Il trasferimento del dominio &egrave; complicato?", "Ce ne occupiamo noi. A te chiediamo solo il codice di autorizzazione del tuo attuale fornitore e ti spieghiamo dove trovarlo."),
         ("Perder&ograve; le email del dominio?", "No. Spostiamo anche le caselle di posta con i messaggi gi&agrave; presenti."),
@@ -526,7 +539,7 @@ def page_contattaci():
         </a>
         <a class="ccard" href="tel:+{TEL2_RAW}">
           <h3>Telefono</h3>
-          <p>Attivo {ORARI}</p>
+          <p>{"Attivo " + ORARI if MODE == "preview" else "Chiamaci pure negli orari di ufficio."}</p>
           <span class="ccard__v">{TEL2}</span>
         </a>
         <div class="ccard">
@@ -583,7 +596,7 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
     for p in PAGES:
         (OUT / f"{p}.html").write_text(head(p) + BODIES[p]() + FOOTER, encoding="utf-8")
-        print("scritta", p + ".html")
+        print(f"[{MODE}] scritta", p + ".html")
 
 if __name__ == "__main__":
     main()
