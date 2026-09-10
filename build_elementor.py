@@ -58,6 +58,10 @@ def container(children, *, bg=None, pad=(80, 20, 80, 20), width="boxed",
         s["background_color"] = bg
     if pad:
         s["padding"] = px(*pad)
+        # sul telefono le sezioni non possono tenere 84px sopra e sotto
+        t, r_, bo, l = pad
+        s["padding_mobile"] = px(round(t * 0.6), min(r_, 18), round(bo * 0.6), min(l, 18))
+        s["padding_tablet"] = px(round(t * 0.8), r_, round(bo * 0.8), l)
     if row:
         s["flex_direction"] = "row"
         s["flex_wrap"] = "wrap" if wrap else "nowrap"
@@ -97,11 +101,18 @@ def widget(kind, settings):
 def heading(text, tag="h2", color=INK, size=None, align=None, css=None, mb=None):
     s = {"title": text, "header_size": tag, "title_color": color}
     if size:
+        # Le misure vanno date anche per tablet e telefono: Elementor NON scala
+        # nulla da solo, quindi un h1 da 50px resterebbe 50px su uno schermo da
+        # 390px e la pagina sembra rotta. (Nella versione HTML lo faceva clamp().)
         s["typography_typography"] = "custom"
         s["typography_font_size"] = {"unit": "px", "size": size}
+        s["typography_font_size_tablet"] = {"unit": "px", "size": round(size * 0.82, 1)}
+        s["typography_font_size_mobile"] = {"unit": "px", "size": max(22, round(size * 0.62, 1))}
         s["typography_font_weight"] = "700"
         s["typography_line_height"] = {"unit": "em", "size": 1.12}
+        s["typography_line_height_mobile"] = {"unit": "em", "size": 1.18}
         s["typography_letter_spacing"] = {"unit": "px", "size": -1}
+        s["typography_letter_spacing_mobile"] = {"unit": "px", "size": -0.5}
     if align:
         s["align"] = align
     if css:
@@ -115,6 +126,7 @@ def testo(html_, color=INK_SOFT, size=16, align=None, css=None, mb=None):
     s = {"editor": html_, "text_color": color,
          "typography_typography": "custom",
          "typography_font_size": {"unit": "px", "size": size},
+         "typography_font_size_mobile": {"unit": "px", "size": max(15, round(size * 0.9, 1))},
          "typography_line_height": {"unit": "em", "size": 1.62}}
     if align:
         s["align"] = align

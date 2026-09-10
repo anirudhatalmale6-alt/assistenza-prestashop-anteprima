@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WebHouse - Pagine Assistenza PrestaShop
  * Description: Crea le 4 pagine (Home, Assistenza PrestaShop, Gratis, Contattaci) come vere pagine Elementor, modificabili dall'editor e gestibili con Yoast. Disattivandolo il sito torna com'era.
- * Version:     2.0.0
+ * Version:     2.1.0
  * Author:      Anirudha Talmale
  * Text Domain: webhouse-pagine
  *
@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'WH_PAGINE_VER', '2.0.0' );
+define( 'WH_PAGINE_VER', '2.1.0' );
 define( 'WH_PAGINE_DIR', plugin_dir_path( __FILE__ ) );
 define( 'WH_PAGINE_URL', plugin_dir_url( __FILE__ ) );
 
