@@ -1,0 +1,223 @@
+/* ==========================================================================
+   Anteprima — 4 pagine / tema XStore + Elementor
+   Design tokens presi dal sito di partenza (verde #12715B, testo #101013,
+   fondi crema, container 1248px). Il font originale e' Graphik, che e' a
+   pagamento: qui uso Inter, gratuito e molto simile.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root{
+  --green:#12715B;
+  --green-dark:#0F604D;
+  --green-soft:#E8F1EE;
+  --ink:#101013;
+  --ink-soft:#4A4A52;
+  --cream:#F5EEE9;
+  --cream-2:#F5F4ED;
+  --line:#E4E1DC;
+  --white:#fff;
+  --wrap:1248px;
+  --r:4px;
+  --r-lg:14px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:16px;line-height:1.5;color:var(--ink);background:var(--white);
+  -webkit-font-smoothing:antialiased;
+}
+img,svg{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.02em;line-height:1.08}
+h1{font-size:clamp(32px,4.1vw,54px);letter-spacing:-.035em}
+h2{font-size:clamp(27px,3.9vw,48px);letter-spacing:-.03em}
+h3{font-size:20px;letter-spacing:-.01em}
+p{margin:0}
+
+.wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 24px}
+.section{padding:88px 0}
+.section--cream{background:var(--cream)}
+.section--cream2{background:var(--cream-2)}
+.eyebrow{
+  font-size:15px;font-weight:600;color:var(--green);
+  margin-bottom:18px;
+}
+.lede{font-size:18px;line-height:1.6;color:var(--ink-soft)}
+.center{text-align:center}
+.section__head{max-width:760px;margin:0 auto 52px}
+.section__head p{margin-top:16px}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  height:48px;padding:0 22px;border-radius:var(--r);
+  font-size:16px;font-weight:500;font-family:inherit;
+  border:1px solid transparent;cursor:pointer;
+  transition:background .18s ease,border-color .18s ease,color .18s ease;
+  white-space:nowrap;
+}
+.btn--primary{background:var(--green);border-color:var(--green);color:#fff}
+.btn--primary:hover{background:var(--green-dark);border-color:var(--green-dark)}
+.btn--ghost{background:transparent;border-color:var(--green);color:var(--green)}
+.btn--ghost:hover{background:var(--green);color:#fff}
+.btn--light{background:#fff;border-color:#fff;color:var(--green)}
+.btn--light:hover{background:rgba(255,255,255,.88)}
+.btn--sm{height:42px;padding:0 18px;font-size:15px}
+
+/* ---------- header ---------- */
+.hdr{
+  position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);
+  backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--line);
+}
+.hdr__in{display:flex;align-items:center;gap:28px;height:80px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:21px;letter-spacing:-.03em}
+.logo__mark{
+  width:40px;height:40px;border-radius:9px;background:var(--green);
+  display:grid;place-items:center;color:#fff;font-size:15px;font-weight:800;letter-spacing:-.04em;
+}
+.logo__b{color:var(--green)}
+.nav{display:flex;gap:30px;margin-left:auto}
+.nav a{font-size:16px;font-weight:500;color:var(--ink)}
+.nav a:hover,.nav a[aria-current]{color:var(--green)}
+.hdr .btn{margin-left:4px}
+.burger{display:none;margin-left:auto;width:44px;height:44px;border:1px solid var(--line);
+  background:#fff;border-radius:var(--r);cursor:pointer;padding:0;place-items:center}
+.burger span{display:block;width:18px;height:2px;background:var(--ink);margin:3px auto;border-radius:2px}
+
+/* ---------- hero ---------- */
+.hero{background:var(--cream);padding:76px 0 84px;overflow:hidden}
+.hero__grid{display:grid;grid-template-columns:1.08fr .92fr;gap:48px;align-items:center}
+.hero h1{margin-bottom:20px}
+.hero__sub{font-size:19px;line-height:1.55;color:var(--ink-soft);max-width:33em}
+.hero__sub strong{color:var(--ink);font-weight:600}
+.hero__cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.hero__by{margin-top:22px;font-size:14px;color:var(--ink-soft)}
+
+/* ---------- version strip ---------- */
+.strip{border-top:1px solid var(--line);background:var(--cream)}
+.strip__in{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
+  gap:12px 30px;padding:26px 24px}
+.strip__lbl{font-size:14px;font-weight:600;color:var(--ink-soft)}
+.chip{
+  display:inline-flex;align-items:center;height:32px;padding:0 14px;border-radius:100px;
+  background:#fff;border:1px solid var(--line);font-size:14px;font-weight:600;color:var(--ink);
+}
+
+/* ---------- steps ---------- */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.step{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:32px 28px}
+.step__n{
+  width:38px;height:38px;border-radius:50%;background:var(--green-soft);color:var(--green);
+  display:grid;place-items:center;font-weight:700;font-size:15px;margin-bottom:20px;
+}
+.step h3{margin-bottom:10px}
+.step p{color:var(--ink-soft);font-size:15.5px;line-height:1.62}
+
+/* ---------- services ---------- */
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:30px 24px;text-align:center;transition:border-color .18s,transform .18s;
+}
+.card:hover{border-color:var(--green);transform:translateY(-3px)}
+.card__ico{
+  width:66px;height:66px;margin:0 auto 18px;border-radius:50%;
+  background:var(--cream-2);display:grid;place-items:center;
+}
+.card__ico svg{width:28px;height:28px;stroke:var(--green);fill:none;stroke-width:1.7;
+  stroke-linecap:round;stroke-linejoin:round}
+.card h3{margin-bottom:9px;font-size:18px}
+.card p{color:var(--ink-soft);font-size:15px;line-height:1.6}
+
+/* ---------- offer ---------- */
+.offer{background:var(--green);color:#fff;border-radius:var(--r-lg);padding:60px 56px;
+  display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+.offer h2{color:#fff}
+.offer p{margin-top:18px;font-size:17.5px;line-height:1.62;color:rgba(255,255,255,.9)}
+.offer__list{list-style:none;margin:0;padding:0;display:grid;gap:13px}
+.offer__list li{display:flex;gap:11px;align-items:flex-start;font-size:16px;color:rgba(255,255,255,.95)}
+.offer__list svg{flex:0 0 21px;width:21px;height:21px;margin-top:1px;stroke:#fff;fill:none;stroke-width:2;
+  stroke-linecap:round;stroke-linejoin:round}
+.offer .btn{margin-top:26px}
+
+/* ---------- faq ---------- */
+.faq{max-width:860px;margin:0 auto}
+.faq details{border:1px solid var(--line);border-radius:var(--r-lg);background:#fff;margin-bottom:12px}
+.faq details[open]{border-color:var(--green)}
+.faq summary{
+  list-style:none;cursor:pointer;padding:22px 26px;font-weight:600;font-size:17px;
+  display:flex;align-items:center;justify-content:space-between;gap:18px;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"";flex:0 0 12px;width:12px;height:12px;border-right:2px solid var(--green);
+  border-bottom:2px solid var(--green);transform:rotate(45deg);transition:transform .2s;margin-top:-4px;
+}
+.faq details[open] summary::after{transform:rotate(-135deg);margin-top:4px}
+.faq p{padding:0 26px 24px;color:var(--ink-soft);font-size:16px;line-height:1.65}
+
+/* ---------- final cta ---------- */
+.cta{background:var(--ink);color:#fff;text-align:center;padding:86px 0}
+.cta h2{color:#fff;max-width:16em;margin:0 auto}
+.cta p{margin:18px auto 30px;max-width:34em;color:rgba(255,255,255,.72);font-size:18px}
+
+/* ---------- footer ---------- */
+.ftr{background:var(--ink);color:rgba(255,255,255,.66);padding:64px 0 34px;border-top:1px solid rgba(255,255,255,.1)}
+.ftr__grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:40px}
+.ftr h4{color:#fff;font-size:15px;margin-bottom:16px;letter-spacing:0}
+.ftr a,.ftr p{font-size:15px;line-height:1.9}
+.ftr a:hover{color:#fff}
+.ftr .logo{color:#fff;margin-bottom:14px}
+.ftr__bar{margin-top:44px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);
+  display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;font-size:14px}
+
+/* placeholder marker so the client can see what still needs his data */
+.ph{
+  background:rgba(255,214,0,.22);border-bottom:1px dashed #b58900;
+  padding:0 3px;border-radius:2px;
+}
+.cta .ph,.offer .ph,.ftr .ph{background:rgba(255,214,0,.28);border-bottom-color:#ffd600}
+
+/* ---------- note bar ---------- */
+.note{background:#101013;color:#fff;font-size:14px;padding:11px 24px;text-align:center}
+.note b{color:#7ee2c4}
+
+/* ---------- responsive ---------- */
+@media (max-width:1080px){
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .ftr__grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:900px){
+  .section{padding:64px 0}
+  .hero{padding:56px 0 64px}
+  .hero__grid{grid-template-columns:1fr;gap:40px}
+  .hero__art{order:-1}
+  .steps{grid-template-columns:1fr}
+  .offer{grid-template-columns:1fr;padding:44px 30px;gap:32px}
+  .hdr .btn{display:none}
+  .burger{display:grid}
+
+  /* pannello mobile */
+  .nav{
+    position:absolute;left:0;right:0;top:100%;
+    flex-direction:column;gap:0;margin:0;
+    background:#fff;border-bottom:1px solid var(--line);
+    box-shadow:0 14px 28px rgba(16,16,19,.09);
+    max-height:0;overflow:hidden;transition:max-height .26s ease;
+  }
+  .nav.is-open{max-height:340px}
+  .nav a{padding:16px 24px;border-top:1px solid var(--line);font-size:17px}
+  .nav a:first-child{border-top:none}
+}
+@media (max-width:560px){
+  .cards{grid-template-columns:1fr}
+  .ftr__grid{grid-template-columns:1fr}
+  .hdr__in{height:68px}
+  .btn{width:100%}
+  .hero__cta{gap:10px}
+  .section{padding:52px 0}
+}
